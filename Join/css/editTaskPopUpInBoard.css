@@ -2,6 +2,7 @@
     background-color: white;
     padding: 40px 40px 60px 40px;
     overflow-x: hidden;
+    scrollbar-width: none;
     height: 600px;
 }
 
@@ -250,7 +251,7 @@
     overflow: hidden;
     max-height: 751px;
     background-color: #fff;
-    border-radius: 15px;
+    border-radius: 10px;
     color: black;
     max-width: 633px;
     width: 451px;

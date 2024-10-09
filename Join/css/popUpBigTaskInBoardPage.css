@@ -16,8 +16,8 @@
 .BigTaskPopUp {
     max-width: 550px;
     width: 427px;
-    max-height: calc(100vh - 0px);
-    border-radius: 30px;
+    max-height: calc(100vh - 157px);
+    border-radius: 10px;
     box-shadow: 0px 0px 4px 0px #00000029;
     display: flex;
     background-color: white;
@@ -61,6 +61,7 @@
     max-height: 800px;
     overflow: scroll;
     overflow-x: hidden;
+    scrollbar-width: none;
 }
 
 .label-big-box {
@@ -68,6 +69,7 @@
     align-items: flex-start;
     justify-content: space-between;
     gap: 10px;
+    width: 100%;
 }
 
 .label-big-box span {
@@ -105,7 +107,7 @@
     margin-block-start: 0px;
     margin-block-end: 0px;
     color: var(--black, #000);
-    font-size: 40px;
+    font-size: 35px;
     font-style: normal;
     font-weight: 700;
     line-height: 120%;
@@ -135,7 +137,7 @@
     color: var(--version-2-main-color, #2A3647);
     font-size: 20px;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 700;
     line-height: 120%;
 }
 
@@ -165,7 +167,7 @@
     color: var(--version-2-main-color, #2A3647);
     font-size: 20px;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 700;
     line-height: 120%;
 }
 
@@ -190,7 +192,7 @@
     color: var(--version-2-main-color, #2A3647);
     font-size: 20px;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 700;
     line-height: 120%;
     align-self: stretch;
 }
@@ -229,18 +231,21 @@
     gap: 12px;
 }
 
+.contact-badge-container span {
+    font-weight: 400;
+}
+
 .subtasksBigBox {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    margin-top: 24px;
 }
 
 .subtasksBigBox span {
     color: var(--version-2-main-color, #2A3647);
     font-size: 20px;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 700;
     line-height: 120%;
     align-self: stretch;
 }
@@ -249,8 +254,9 @@
     display: flex;
     flex-direction: column;
     gap: 4px;
-    overflow-y: scroll;
-    height: 110px;
+    /* overflow-y: scroll;
+    scrollbar-width: none;
+    height: 162px; */
 }
 
 .subtaskBigBoxContent {
@@ -283,8 +289,6 @@
     display: flex;
     justify-content: flex-end;
     gap: 8px;
-    position: sticky;
-    bottom: 13px;
     background: #FFF;
 }
 
@@ -301,7 +305,7 @@
     color: var(--version-2-main-color, #2A3647);
     font-size: 16px;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 700;
     line-height: 120%;
     display: flex;
     align-items: center;
@@ -502,11 +506,11 @@
         display: flex;
         flex-direction: column;
         gap: 4px;
-        overflow-y: scroll;
+        /* overflow-y: scroll;
         height: 80px;
         margin-bottom: 20px;
         width: 332px;
-        margin-bottom: 160px;
+        margin-bottom: 160px; */
 
     }
 
@@ -526,8 +530,6 @@
         display: flex;
         justify-content: flex-end;
         gap: 8px;
-        position: sticky;
-        bottom: 13px;
         background: #ffffff00;
     }
 
@@ -600,4 +602,7 @@
         background-image: url(/Join/img/edit-pen-icon-subtasks.svg);
     }
 
+    .footerBigBox {
+        padding-bottom: 50px;
+    }
 }

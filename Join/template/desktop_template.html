@@ -1,18 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
 
-<div id="desktopTemplate">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanban Project Management Tool</title>
+    <link rel="stylesheet" href="/Join/style.css"> 
+    <link rel="stylesheet" href="/Join/css/desktop_template.css">
+    <script defer src="/Join/js/main.js"></script> 
+</head>
 
-    <div class="desktop-header">
-        <img id="LogoImage" src="" alt="">
-        <span class="header-text">
-            <span class="text">Kanban Project Management Tool</span>
-        </span>
-        <div class="header-user-help">
-            <div class="user-help">
-                <a href="/Join/template/help_template.html">
-                    <img src="/Join/img/help.svg" alt="Help" />
-                </a>
+<body>
+
+    <div id="desktopTemplate">
+
+        <div class="desktop-header">
+            <img id="LogoImage" src="" alt="">
+            <span class="header-text">
+                <span class="text">Kanban Project Management Tool</span>
+            </span>
+            <div class="header-user-help">
+                <div class="user-help">
+                    <a href="/Join/template/help_template.html">
+                        <img src="/Join/img/help.svg" alt="Help" />
+                    </a>
+                </div>
             </div>
-        </div>
             <div onclick="menuStyle()" class="header-userprofil">
                 <div class="user-profil-box">
                     <img src="/Join/img/user-ellipse.svg" />
@@ -20,55 +33,52 @@
                 </div>
             </div>
         </div>
+
         <div class="menu" style="display:none;" id="style">
             <a href="/Join/template/legal_template.html" style="color: white;">Legal Notice</a>
-            <a href="/Join/template/privacy_template.html"style="color: white;">Privacy Policy</a>
-            <a href="/Join/index.html"style="color: white;">Log Out</a>
+            <a href="/Join/template/privacy_template.html" style="color: white;">Privacy Policy</a>
+            <a href="/Join/index.html" style="color: white;">Log Out</a>
         </div>
+
+        <div class="desktop-navbar">
+            <div class="logo">
+                <img src="/Join/img/Join-icon-desktop_9.png" />
+            </div>
+
+            <div class="desktop-navbar-menu">
+                <a href="/Join/template/summary_template.html" class="menu-links" id="summary">
+                    <img src="/Join/img/summary-icon.svg" />
+                    <span>Summary</span>
+                </a>
+                <a href="/Join/template/addTask_template.html" class="menu-links" id="addTask">
+                    <img src="/Join/img/addTask-icon.svg" />
+                    <span>Add Task</span>
+                </a>
+                <a href="/Join/template/board_template.html" class="menu-links" id="board">
+                    <img id="boardImage" src="/Join/img/board-icon.svg" />
+                    <span class="board-span">Board</span>
+                </a>
+                <a href="/Join/template/contacts_template.html" class="menu-links" id="Contacts">
+                    <img src="/Join/img/contacts-icon.svg" />
+                    <span>Contacts</span>
+                </a>
+            </div>
+
+            <div class="navbar-footer">
+                <a href="/Join/template/privacy_template.html" class="navbar-footer-links">
+                    <span>Privacy Policy</span>
+                </a>
+                <a href="/Join/template/legal_template.html" class="navbar-footer-links">
+                    <span>Legal Notice</span>
+                </a>
+            </div>
+        </div>
+
     </div>
 
-    <div class="desktop-navbar">
 
-        <div class="logo">
-            <img src="/Join/img/Join-icon-desktop.svg" />
-        </div>
+    
 
+</body>
 
-        <div class="desktop-navbar-menu">
-
-            <a href="/Join/template/summary_template.html" class="menu-links" id="summary">
-                <img src="/Join/img/summary-icon.svg" />
-                <span>Summary</span>
-            </a>
-
-            <a href="/Join/template/addTask_template.html" class="menu-links" id="addTask">
-                <img src="/Join/img/addTask-icon.svg" />
-                <span>Add Task</span>
-            </a>
-
-            <a href="/Join/template/board_template.html"  class="menu-links" id="board">
-                <img id="boardImage" src="/Join/img/board-icon.svg" />
-                <span>Board</span>
-            </a>
-
-            <a href="/Join/template/contacts_template.html" class="menu-links" id="Contacts">
-                <img src="/Join/img/contacts-icon.svg" />
-                <span>Contacts</span>
-            </a>
-
-        </div>
-
-        <div class="navbar-footer">
-
-            <a href="/Join/template/privacy_template.html"  class="navbar-footer-links">
-                <span>Privacy Policy</span>
-            </a>
-
-            <a href="/Join/template/legal_template.html"  class="navbar-footer-links">
-                <span>Legal Notice</span>
-            </a>
-
-        </div>
-    </div>
-</div>
-
+</html>

@@ -31,7 +31,7 @@
 
 </head>
 
-<body onload="searchContacts(); init('addTask')">
+<body onload="searchContacts(); init('addTask'); smoothPageLoad()">
 
     <div w3-include-html="/Join/template/desktop_template.html"></div>    
 
@@ -45,6 +45,8 @@
                 </div>
         
                 <div class="formLeftAndRightFlex">
+
+                <div class="formBox">
         
                     <div class="addTaskLeftLittle">
         
@@ -160,26 +162,39 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
+
+                    <div class="formFooter">                   
+                            
+                                        <div class="footerButtonsAddTask"> 
+                                            
+                                            <p class="requieredField"><span>*</span>This field is required!</p>
+                                        <div class="buttonsFooter">
+                                            <button id="ClearButton" class="footerButtonClear" type="button">Clear
+                                                <img src="/Join/img/clear-icon-footer-board-addTask.svg" class="clearIconFooter">
+                            
+                                            </button>
+
+                                            <button class="footerButtonCreateTask">Create Task
+                                                <img src="/Join/img/check-icon-footer-board-addTask.svg" alt="">
+                                            </button></div>          
+                            
+                                        </div>
+                                    </div>
+
+
+
+
+
+
+            </div>
         
 
-                <div class="formFooter">                   
-        
-                    <div class="footerButtonsAddTask"> 
-                        
-                        <p class="requieredField"><span>*</span>This field is required!</p>
-                      <div class="buttonsFooter">
-                        <button id="ClearButton" class="footerButtonClear" type="button">Clear
-                            <img src="/Join/img/clear-icon-footer-board-addTask.svg" class="clearIconFooter">
-        
-                        </button>
+               
 
-                        <button class="footerButtonCreateTask">Create Task
-                            <img src="/Join/img/check-icon-footer-board-addTask.svg" alt="">
-                        </button></div>          
-        
-                    </div>
-                </div>
+
+
             </div>
         </form>
         

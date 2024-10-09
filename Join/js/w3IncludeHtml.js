@@ -24,19 +24,40 @@ function menuStyle() {
  * @param {Event} event - The click event object.
  * @returns {void}
  */
+function addEventListeners() {
+  document.addEventListener("click", function (event) {
+    let openDiv = document.getElementById("style");
+    let menuButton = document.querySelector(".header-userprofil");
 
-document.addEventListener('click', function (event) {
-   // Find the div element representing the menu style
-  let openDiv = document.getElementById('style');
-  // Find the menu button element
-  let menuButton = document.querySelector('.header-userprofil');
-  // Check if the click event target is not within the menu style or menu button
-  // and the menu is currently open
-  if (!openDiv.contains(event.target) && !menuButton.contains(event.target) && isMenuOpen) {
-     // If so, hide the menu style and set the menu state to closed
-    openDiv.style.display = 'none';
-    isMenuOpen = false;
-  }  
+    if (!openDiv || !menuButton) {
+      return;
+    }
+
+    if (
+      !openDiv.contains(event.target) &&
+      !menuButton.contains(event.target) &&
+      isMenuOpen
+    ) {
+      openDiv.style.display = "none";
+      isMenuOpen = false;
+    }
+  });
+}
+
+document.addEventListener("click", function (event) {
+  let openDiv = document.getElementById("style");
+  let menuButton = document.querySelector(".header-userprofil");
+
+  if (openDiv && menuButton) {
+    if (
+      !openDiv.contains(event.target) &&
+      !menuButton.contains(event.target) &&
+      isMenuOpen
+    ) {
+      openDiv.style.display = "none";
+      isMenuOpen = false;
+    }
+  }
 });
 
 /**
@@ -46,10 +67,7 @@ document.addEventListener('click', function (event) {
  */
 async function init(currentPage) {
    // Include HTML content asynchronously
-  await includeHTML()
-  if (currentPage) {
-       document.getElementById(currentPage).style.backgroundColor = 'rgba(9, 25, 49, 1)';
-  }  
+  await includeHTML() 
 }
 
 /**

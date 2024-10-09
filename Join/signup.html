@@ -8,14 +8,19 @@
     <link rel="icon" href="/Join/img/logo1.png">
     <link rel="stylesheet" href="/Join/css/signup.css">
     <link rel="stylesheet" href="/Join/fonts.css">
-    <script src="/Join/js/storage.js"></script>
-    <script src="/Join/js/register.js"></script>
-    <script src="/Join/js/login.js"></script>
-    <link rel="stylesheet" href="/Join/css/privacy_template_extern.css">
+    <link rel="stylesheet" href="/Join/style.css">
+    <script src="/Join/js/storage.js" defer></script>
+    <script src="/Join/js/w3IncludeHtml.js" defer></script>
+
+    <script src="/Join/js/contacts.js" defer></script>
+    <script src="/Join/js/register.js" defer></script>
+    <script src="/Join/js/login.js" defer></script>
+    <script src="/Join/js/main.js" defer></script>
+    <script src="/Join/js/summary.js" defer></script>
 
 </head>
 
-<body onload="init()">
+<body onload="init('signup'); smoothPageLoad()">
     
         <div>
             <img src="./img/logo1.png" alt="Logo" class="logo" id="logo">
@@ -54,7 +59,7 @@
                     <div>
                         <div class="i-accept">
                             <input required class="checkbox" type="checkbox">
-                            <span class="accept">I accept the <a class="policy" href="/Join/templates/privacy_template_extern.html"> Privacy policy</a></span>
+                            <span class="accept">I accept the <a class="policy" href="/Join/template/privacy_template.html"> Privacy policy</a></span>
                         </div>
                     </div>
                     <div class="signup-button">
@@ -67,8 +72,8 @@
         </div>
     </div>
     <footer>
-                <a class="link" href="/Join/templates/privacy_template_extern.html">Privacy Policy</a>
-                <a class="link" href="/Join/templates/legal_template_extern.html">Legal Notice</a>
+                <a class="link" href="/Join/template/privacy_template.html">Privacy Policy</a>
+                <a class="link" href="/Join/template/legal_template.html">Legal Notice</a>
             </footer>
 </body>
 

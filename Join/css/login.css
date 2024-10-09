@@ -49,6 +49,10 @@ body.animate .logo {
     margin-top: 10px;
 }
 
+.not-user-div-mobile {
+    display: none;
+}
+
 .not-user {
     font-size: 20px;
     font-family: inter;
@@ -68,6 +72,7 @@ body.animate .logo {
     font-family: inter;
     cursor: pointer;
     border: none;
+    box-shadow: 0 10px 6px -6px #777;
 }
 
 .sign-in-btn:hover {
@@ -88,17 +93,18 @@ body.animate .logo {
     align-items: center;
     justify-content: center;
     height: auto;
-    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
-    border-radius: 30px;
-    width: auto;
-    padding: 48px 115px 20px 115px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 500px;
 }
 
 form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 48px;
+    margin: 28px;
+    width: -webkit-fill-available;
 }
 
 .login-headline {
@@ -116,14 +122,14 @@ form {
     width: 150px;
     background-color: #29abe2;
     border-radius: 5px;
-    margin: 16px 0 32px;
+    margin: 2px 0 32px;
 }
 
 .inputs {
-    margin: 35px;
     display: flex;
     flex-direction: column;
-    width: 80%;
+    width: 100%;
+    gap: 20px;
 }
 
 input {
@@ -131,18 +137,23 @@ input {
     outline: none;
     width: 100%;
     font-size: 20px;
+    font-family: inter;
 }
 
 .input-fields {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 36px;
+    align-items: center;
     background-color: white;
     border: 1px solid #d1d1d1;
-    width: 422px;
+    width: auto;
     height: auto;
     border-radius: 10px;
     padding: 12px 21px;
+}
+
+::placeholder {
+    color: var(--Style, #D1D1D1);
 }
 
 .icon-1 {
@@ -171,8 +182,8 @@ input {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    padding-left: 67px;
-    width: 50%;
+    margin-top: 13px;
+    width: 100%;
 }
 
 .checkbox {
@@ -194,7 +205,8 @@ input {
 .log-in-buttons {
     display: flex;
     justify-content: center;
-    padding: 16px;
+    gap: 16px;
+    margin-top: 20px;
 }
 
 .log-in-btn {
@@ -208,8 +220,7 @@ input {
     font-family: inter;
     cursor: pointer;
     border: none;
-    margin: 45px;
-    margin-right: 6px;
+    box-shadow: 0 10px 6px -6px #777;
 }
 
 .log-in-btn:hover {
@@ -227,7 +238,7 @@ input {
     color: #2A3647;
     font-family: inter;
     cursor: pointer;
-    margin: 45px;
+    box-shadow: 0 10px 6px -6px #777;
 }
 
 .guest-btn:hover {
@@ -285,9 +296,6 @@ footer {
 }
 
 @media (max-width: 599px) {
-    .input-fields {
-        width: 275px;
-    }
 
     .log-in-buttons {
         flex-direction: column;
@@ -312,7 +320,7 @@ footer {
     .top-container {
         display: flex;
         flex-direction: column-reverse;
-        height: 100vh;
+        height: 88vh;
     }
 
     .log-in-btn {
@@ -328,14 +336,12 @@ footer {
     }
 
     footer {
-        bottom: 16px;
+        bottom: 13px;
         gap: 40px;
     }
 
     .input-fields {
-        width: 80%;
         height: 17px;
-        margin-bottom: 15px;
     }
 
     .login-headline {
@@ -345,28 +351,32 @@ footer {
 
     body.animate .logo {
         top: 24px;
-        left: 61px;
-        width: 84px;
+        left: 25px;
+        width: 105px;
     }
 
     .not-user-div {
-        flex-direction: row;
-        justify-content: center;
-        margin-right: 0px;
-        height: 58px;
-        position: relative;
-        bottom: 131px;
+        display: none;
+    }
+
+    .not-user-div-mobile {
+        display: block;
     }
 
     .log-in-window {
         width: 80%;
-        position: relative;
-        top: -52px;
     }
 
     .not-user {
-        font-size: 16px;
-        width: 138px;
+        display: none;
+    }
+
+    .sign-in-btn {
+        width: 170px;
+    }
+
+    .sign-in-btn b {
+        font-size: 18px;
     }
 
     input {
@@ -376,8 +386,6 @@ footer {
     .inputs {
         display: flex;
         flex-direction: column;
-        margin: 20px;
-        /* width: 100%; */
     }
 
     .underscore {
@@ -387,13 +395,22 @@ footer {
         border-radius: 5px;
         margin: 2px 0 32px;
     }
-
-
 }
 
 @media (max-hight: 1040px) {
     footer {
         bottom: -270px;
+    }
+}
+
+@media (max-width: 430px) {
+    .login-div {
+        height: 64vh;
+    }
+
+    .log-in-window {
+        position: relative;
+        top: -81px;
     }
 }
 
@@ -403,10 +420,38 @@ footer {
     }
 
     .log-in-window {
-        top: -21px
+        top: -56px
+    }
+}
+
+@media (max-width: 375px) {
+    .log-in-buttons {
+        margin: 0;
     }
 
-    .underscore {
-        margin: 2px 0 3px;
+    form {
+        padding: 10px 0px 12px 0px;
+        margin-bottom: 0px;
+        margin-top: 0;
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+
+    .inputs {
+        gap: 10px;
+    }
+
+    .remember {
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 330px) {
+    .login-div {
+        height: 38vh;
+    }
+
+    form {
+        padding: 0px 0px 20px 0px;
     }
 }

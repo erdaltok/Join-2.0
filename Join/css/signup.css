@@ -54,10 +54,9 @@ body {
     align-items: center;
     justify-content: center;
     height: auto;
-    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
-    border-radius: 30px;
-    width: 46%;
-    padding: 40px 80px 0px 80px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    border-radius: 10px;
+    padding: 0 20px;
     position: relative;
     height: 60vh;
 }
@@ -83,6 +82,16 @@ form {
     margin: 16px 0 32px;
 }
 
+#personInputImage {
+    position: relative;
+    left: 4px;
+}
+
+#personInputImage {
+    width: 26px;
+    height: 24px;
+}
+
 .inputs {
     margin: 14px;
     display: flex;
@@ -101,6 +110,7 @@ input {
 .input-fields {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-bottom: 16px;
     background-color: white;
     border: 1px solid #d1d1d1;
@@ -108,6 +118,10 @@ input {
     height: 3vh;
     border-radius: 10px;
     padding: 12px 21px;
+}
+
+::placeholder {
+    color: var(--Style, #D1D1D1);
 }
 
 .icon-1 {
@@ -175,6 +189,7 @@ input {
     cursor: pointer;
     border: none;
     margin-bottom: 29px;
+    box-shadow: 0 10px 6px -6px #777;
 }
 
 .signup-btn:hover {
@@ -311,17 +326,16 @@ footer {
         bottom: 17px;
     }
 
-    #personInputImage {
+    #personInputImage img {
         width: 25px;
         height: 22px;
-        position: relative;
-        left: 2px;
     }
 
     .top-container {
-        margin-top: 30px;
+        margin-top: 0px;
         justify-content: center;
         align-items: center;
+        height: 100vh;
     }
 
     header {
@@ -363,5 +377,55 @@ footer {
         height: 69vh;
         width: 91%;
         margin-top: 19px;
+    }
+}
+
+@media (max-width: 430px) {
+    .signup-window {
+        height: auto;
+        margin-top: 0px;
+        top: -40px;
+    }
+
+    .underscore {
+        margin: 7px 0 2px;
+    }
+
+    .inputs {
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: 320px) {
+    .signup-headline {
+        font-size: 20px;
+    }
+
+    .back-arrow {
+        left: -106px;
+    }
+
+    .input {
+        font-size: 12px;
+    }
+
+    .input-fields {
+        padding: 9px 21px;
+    }
+
+    .inputs {
+        position: relative;
+        top: -15px;
+        margin-bottom: 36px;
+    }
+
+    .i-accept {
+        position: relative;
+        top: -40px;
+    }
+
+    .signup-button {
+        position: relative;
+        top: -32px;
     }
 }

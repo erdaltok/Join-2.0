@@ -113,23 +113,86 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 /**
- * Loads contacts for the form and populates the selectable contacts list.
- * Retrieves contact data from local storage and renders each contact as a selectable option.
+ * Loads contacts from Firebase and populates the selectable contacts list in the form.
+ * This is the main function that coordinates the data loading and rendering process.
+ * @async
+ * @returns {Promise<void>}
  */
-function loadContactsForForm() {
+async function loadContactsForForm() {
   const listSelectableContacts = document.getElementById("listSelectableContacts");
   if (listSelectableContacts) {
     const ulElement = listSelectableContacts.querySelector("ul");
-    const contacts = JSON.parse(localStorage.getItem("contacts")) || {
-      names: [], emails: [],phones: [],}
     ulElement.innerHTML = "";
-    contacts.names.forEach((name) => {const initials = getInitials(name);
-      const firstLetter = getFirstLetter(name); const initialColor = getLetterColor(firstLetter);
-      const liElement = document.createElement("li");
-      liElement.className = "contact-line"; liElement.innerHTML = loadContactsForFormHtmlTemplate(
-     name, initials, initialColor); ulElement.appendChild(liElement);});
-    addEventListenersToContactLines();
+
+    try {
+      const contacts = await fetchContactsFromFirebase(); // Fetch contacts data
+      if (contacts.length === 0) {
+        renderNoContactsMessage(ulElement);
+        return;
+      }
+
+      renderContactsList(contacts, ulElement); 
+      addEventListenersToContactLines();
+
+    } catch (error) {
+      console.error("Error loading contacts from Firebase:", error);
+    }
   }
+}
+
+/**
+ * Fetches contacts data from Firebase and returns it as an array.
+ * @async
+ * @returns {Promise<Array>} - An array of contact objects from Firebase.
+ */
+async function fetchContactsFromFirebase() {
+  const loadedContacts = await loadData("contacts");
+
+  if (!loadedContacts) {
+    return [];
+  }
+
+  return Object.entries(loadedContacts).map(([id, contact]) => ({
+    id, 
+    ...contact
+  }));
+}
+
+/**
+ * Renders a message indicating that no contacts are available.
+ * @param {HTMLElement} ulElement - The unordered list (ul) element where contacts should be displayed.
+ */
+function renderNoContactsMessage(ulElement) {
+  ulElement.innerHTML = "<li>No contacts available</li>";
+}
+
+/**
+ * Renders the list of contacts in the form's selectable contacts section.
+ * @param {Array} contacts - The array of contact objects.
+ * @param {HTMLElement} ulElement - The unordered list (ul) element where contacts will be displayed.
+ */
+function renderContactsList(contacts, ulElement) {
+  contacts.forEach((contact) => {
+    const liElement = createContactListItem(contact);
+    ulElement.appendChild(liElement);
+  });
+}
+
+/**
+ * Creates an HTML list item (li) element for a contact.
+ * @param {Object} contact - The contact object containing name, email, etc.
+ * @returns {HTMLElement} - A list item element with the contact details.
+ */
+function createContactListItem(contact) {
+  const initials = getInitials(contact.nameKey);
+  const firstLetter = getFirstLetter(contact.nameKey);
+  const initialColor = getLetterColor(firstLetter);
+
+  const liElement = document.createElement("li");
+  liElement.className = "contact-line";
+  liElement.innerHTML = loadContactsForFormHtmlTemplate(contact.nameKey, initials, initialColor);
+
+  return liElement;
 }
 
 /**

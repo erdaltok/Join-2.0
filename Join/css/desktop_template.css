@@ -6,6 +6,11 @@ body {
     padding: 0;
 }
 
+.menu-links {
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+}
+
 .menu-links.active {
     background-color: rgba(9, 25, 49, 1);
 }
@@ -15,22 +20,23 @@ body {
     min-height: 96px;
     max-height: 96px;
     gap: 34px;
-    top: 0px;
-    left: 0px;
-    right: 0px;
     margin: auto;
     display: flex;
     position: fixed;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.10000000149011612);
+    box-shadow: 0 10px 6px -6px #777;
     align-items: center;
     z-index: 10;
     justify-content: space-between;
     background-color: rgba(255, 255, 255, 1);
+    border-radius: 10px;
+    top: 10px;
+    left: 253px;
+    right: 14px;
 }
 
 .logo {
     position: relative;
-    top: -105px;
+    top: -36px;
 }
 
 .header-text {
@@ -67,7 +73,7 @@ body {
 .text {
     position: absolute;
     top: 34px;
-    left: 360px;
+    left: 62px;
 }
 
 .menu {
@@ -102,29 +108,30 @@ a {
 }
 
 .desktop-navbar {
-    top: 0px;
-    left: 0px;
+    top: 10px;
+    left: 6px;
     width: 232px;
-    height: 100vh;
+    height: 98vh;
     display: flex;
-    padding: 64px 0;
     position: fixed;
     z-index: 20;
     align-items: center;
     flex-direction: column;
     justify-content: space-around;
-    background-color: rgba(42, 54, 71, 1);
+    border-radius: 10px;
+    background-color: #2A3647;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .desktop-navbar-menu {
     gap: 15px;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     flex-direction: column;
     justify-content: center;
     width: 100%;
     position: relative;
-    top: -150px;
+    top: -17px;
 }
 
 .menu-links {
@@ -140,15 +147,19 @@ a {
     color: #fff;
     font-size: 16px;
     font-weight: normal;
+    border-radius: 10px;
+    width: 218px;
 }
 
 .desktop-navbar-menu a {
     text-decoration: none;
     list-style: none;
+    font-size: 15px;
 }
 
 .menu-links:hover {
-
+    border-radius: 10px;
+    width: 218px;
     opacity: 1 !important;
     cursor: pointer;
     background-color: rgba(9, 25, 49, 1);
@@ -157,18 +168,19 @@ a {
 .navbar-footer {
     display: flex;
     flex-direction: column;
-    align-items: flex-start !important;
+    align-items: center;
     padding: 8px;
     align-items: center;
     gap: 8px;
     color: #fff;
     position: relative;
-    bottom: 11px;
+    bottom: -43px;
 }
 
 .navbar-footer a {
     text-decoration: none;
     color: #fff;
+    font-size: 15px;
 }
 
 .navbar-footer-links {
@@ -191,7 +203,7 @@ a {
 }
 
 @media(max-width: 869px) {
-   
+
     .titleDateAddTaskBoard {
         margin-top: 20px;
     }
@@ -223,8 +235,15 @@ a {
     .desktop-navbar {
         top: auto;
         bottom: 0px;
-        height: auto;
+        height: 92px;
         width: 100vw;
+        padding: 0;
+        left: 0;
+        border-radius: unset;
+    }
+
+    .desktop-header {
+        left: 14px;
     }
 
     .menu-links {
@@ -239,7 +258,7 @@ a {
         height: 400px;
         align-items: center;
         height: 93px;
-        margin-top: 156px;
+        top: auto;
     }
 
     .desktop-navbar-menu a {
@@ -247,10 +266,6 @@ a {
         width: 60px;
         flex-direction: column;
         border-radius: 10px;
-        position: relative;
-        right: -10px;
-        margin-right: 26px;
-        margin-top: 28px;
     }
 
     .desktop-navbar-menu span {
@@ -261,7 +276,11 @@ a {
     }
 
     #boardImage {
-        margin-top: 7px;
+        margin-top: 3px;
+    }
+
+    .board-span {
+        margin-top: 2px;
     }
 
     .navbar-footer {
@@ -299,7 +318,7 @@ a {
     #LogoImage {
         content: url(/Join/img/LogoWhite1.svg);
         position: absolute;
-        width: 42px;
+        width: 38px;
         left: 40px;
     }
 
@@ -326,27 +345,72 @@ a {
         top: 34px;
     }
 
-    .menu-links {
-        margin-inline-start: -34px;
-    }
-
     .desktop-navbar-menu {
-        margin-left: 40px;
         justify-content: center;
     }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 570px) {
     .menu-links {
-        margin-inline-start: -58px;
         font-size: 10px;
         padding: 10px 42px;
+        margin-right: 10px;
+    }
+
+    .menu-links:hover {
+        border-radius: 10px;
+        width: 0px;
+        opacity: 1 !important;
+        cursor: pointer;
+        background-color: rgba(9, 25, 49, 1);
     }
 
     .desktop-navbar-menu {
-        margin-left: 60px;
-        height: 93px;
-        margin-top: 156px;
+        gap: 0;
+    }
+
+    .desktop-navbar {
+        height: 84px;
+    }
+}
+
+@media (max-width: 439px) {
+    .desktop-header {
+        height: 50px;
+        min-height: 63px;
+        justify-content: space-between;
+    }
+
+    .user-profil-box {
+        position: relative;
+        top: 0;
+        right: 20px;
+    }
+
+    .user-profil-box img {
+        width: 42px;
+    }
+
+    .user-initials {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 375px) {
+    .desktop-navbar {
+        height: 69px;
+    }
+
+    .desktop-navbar-menu a {
+        gap: 0;
+        height: 54px;
+        padding: 0 38px;
+    }
+}
+
+@media (max-width: 330px) {
+    .menu-links {
+        padding: 10px 36px;
     }
 }
 

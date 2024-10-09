@@ -2,8 +2,8 @@
  * Opens the form to add a new task with a specified status.
  * @param {string} status - The initial status of the new task (default: "todo").
  */
-function openNewTaskBoard(status = "todo") {
-  prepareTaskForm(status);
+async function openNewTaskBoard(status = "todo") {
+  await prepareTaskForm(status);
   showTaskFormPopup();
 }
 
@@ -11,8 +11,8 @@ function openNewTaskBoard(status = "todo") {
  * Prepares the form to add a new task with a specified status.
  * @param {string} status - The initial status of the new task (default: "todo").
  */
-function prepareTaskForm(status = "todo") {
-  searchContacts();
+async function prepareTaskForm(status = "todo") {
+  await searchContacts(); 
   newTaskStatus = status;
   let importAddTaskForm = document.getElementById("importAddTaskForm");
   if (importAddTaskForm) {
@@ -88,6 +88,7 @@ function restorePageState() {
 function closeAddTaskForm() {
   closePopup();
   restorePageState();
+  resetSubtasks();
 }
 
 /**
@@ -135,6 +136,7 @@ function createNewTaskOrUpdateExistingTask() {
   const priority = getActivePriority();
   const subtasks = getSubtasks();
 
+  // Check if an existing task needs to be updated or a new one is created
   if (currentTaskId !== null) {
     updateExistingTask(
       formData,
@@ -144,19 +146,22 @@ function createNewTaskOrUpdateExistingTask() {
       subtasks
     );
   } else {
-    createNewTask(
-      formData,
+    // Creating a new task
+    const newTask = {
+      id: generateUniqueTaskId(), // New unique ID for the task
+      ...formData,
       priorityImage,
-      assignedContactsData,
       priority,
-      subtasks
-    );
+      assignedContactsBadges: assignedContactsData,
+      subtasks,
+      status: newTaskStatus,
+    };
+    tasks.push(newTask); // Add new task to tasks array
+    addTaskToBoard(newTask, newTask.status || "todo");
   }
   finalizeTaskCreation();
-  updateAddedContactsDisplay();
-  resetTaskForm();
-  currentTaskId = null;
 }
+
 
 /**
  * Creates a new task with the provided data and adds it to the task board.
@@ -189,6 +194,7 @@ function createNewTask(
   tasks.push(newTask);
   addTaskToBoard(newTask, newTask.status || "todo");
   resetTaskForm();
+  resetSubtasks();
 }
 
 /**
@@ -225,9 +231,9 @@ function updateExistingTask(
  * Finalizes the task creation process, saves tasks to storage, and resets the form.
  */
 async function finalizeTaskCreation() {
-  await saveTasksToStorage();
+  await saveTasksToStorage(); 
   const currentPath = window.location.pathname;
-  if (currentPath.includes('board_template.html')) {
+  if (currentPath.includes("board_template.html")) {
     closeAddTaskForm();
   }
 
@@ -235,7 +241,7 @@ async function finalizeTaskCreation() {
   resetTaskForm();
   currentTaskId = null;
 
-  if (currentPath.includes('addTask_template.html')) {
+  if (currentPath.includes("addTask_template.html")) {
     setTimeout(() => {
       window.location.href = "board_template.html";
     }, 2000);
@@ -252,6 +258,7 @@ function resetTaskForm() {
   document.getElementById("idTitleDateAddTask").value = "";
   document.getElementById("idSelectCategoryAddTask").value = "";
   document.getElementById("addedSubstaskList").innerHTML = "";
+  document.getElementById("addedSubstaskList").value = "";
   document.getElementById("inputFieldSubtaskId").value = "";
   document.getElementById("inputFieldSubtaskId").innerHTML = "";
 
@@ -259,6 +266,7 @@ function resetTaskForm() {
   selectedContacts = [];
   updateAddedContactsDisplay();
   resetSelectedContacts();
+  resetSubtasks();
 }
 
 /**
@@ -298,17 +306,31 @@ function handleFormSubmitFromAddTask(event) {
 }
 
 /**
- * Searches contacts based on the entered search text and renders the filtered contacts.
- */
-async function searchContacts(){
-  try { const loadedContacts = await getItem("contacts");
-    if (!loadedContacts) { contactsLocal = [];return;}
-    contactsLocal = Array.isArray(loadedContacts) ? loadedContacts : JSON.parse(loadedContacts);} catch (error) {console.error("Fehler beim Laden der Tasks:", error);}
-  const searchText = document.getElementById("idTitleSelectContactsAddTask")
-    .value.toLowerCase();
+* Searches for contacts based on the entered search text and renders the filtered contacts.
+* Changes: Using Firebase instead of `getItem`.
+*/
+async function searchContacts() {
+  try {
+    const loadedContacts = await loadData("contacts");
+    if (!loadedContacts) {
+      contactsLocal = [];
+      return;
+    }
+    contactsLocal = Array.isArray(loadedContacts)
+      ? loadedContacts
+      : Object.values(loadedContacts); // Change to array.
+  } catch (error) {
+    console.error("Fehler beim Laden der Kontakte:", error); 
+  }
+
+  const searchText = document.getElementById("idTitleSelectContactsAddTask")?.value?.toLowerCase(); 
+  if (!searchText) return;
+
   let names = [];
-  for(i=0; i< contactsLocal.length;i++)
-  {names.push(contactsLocal[i].nameKey);}
+  for (let i = 0; i < contactsLocal.length; i++) {
+    names.push(contactsLocal[i].nameKey);
+  }
+
   const filteredContacts = names.filter((name) => name.toLowerCase().includes(searchText));
   renderFilteredContacts(filteredContacts);
 }
@@ -331,5 +353,7 @@ function renderFilteredContacts(filteredContactNames) {
     ulElement.appendChild(liElement);});
   addEventListenersToContactLines();
 }
+
+
 
 

@@ -16,42 +16,89 @@
 .div-container {
     display: flex;
     justify-content: space-between;
-    width: 1212px;
-    height: 592px;
-    border-radius: 30px;
+    border-radius: 10px;
     background-color: #2a3647;
+    position: relative;
+}
+
+.slide-in {
+    animation: slide-in 0.2s ease-in-out forwards;
+}
+
+.slide-out {
+    animation: slide-out 0.2s ease-in-out forwards;
+}
+
+@keyframes slide-in {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slide-out {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.seperatorDiv {
+    width: 150px;
+    height: 3px;
+    background: #29abe2;
+}
+
+.titleAddNewTaskForm {
+    padding: 0 20px 0 20px;
 }
 
 .new-text {
     color: white;
     font-family: inter;
     font-weight: 700;
-    font-size: 61px;
+    font-size: 50px;
     cursor: default;
+    margin: 0;
 }
 
 .new-text-2 {
     color: white;
     font-family: inter;
     font-weight: 400;
-    font-size: 27px;
+    font-size: 20px;
     cursor: default;
 }
 
 .new-card {
-    position: relative;
-    left: 68px;
-    top: 148px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     line-height: 0.5;
+    padding: 20px;
+}
+
+.new-card img {
+    width: 43px;
+    height: 52px;
+    position: absolute;
+    left: 53px;
+    top: 28px;
 }
 
 .div-input {
     display: flex;
     align-items: center;
     background-color: white;
-    border-top-right-radius: 30px;
-    border-bottom-right-radius: 30px;
+    border-radius: 10px;
     width: 707px;
+    padding-top: 39px;
 }
 
 .picture {
@@ -73,10 +120,18 @@
 }
 
 .close {
-    position: relative;
-    top: -258px;
-    left: 538px;
+    position: absolute;
+    top: 28px;
     cursor: pointer;
+    right: 53px;
+}
+
+#newContactJoinImage {
+    width: 43px;
+    height: 58px;
+    position: absolute;
+    left: 53px;
+    top: 28px;
 }
 
 .div-input-fields {
@@ -88,6 +143,7 @@
 .input-fields {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-bottom: 36px;
     background-color: white;
     border: 1px solid #d1d1d1;
@@ -127,7 +183,6 @@ input {
     font-family: inter;
     cursor: pointer;
     border: none;
-    margin: 45px;
     margin-right: 6px;
 }
 
@@ -136,7 +191,7 @@ input {
 }
 
 .cancel-btn {
-    width: 126px;
+    width: 214px;
     height: 56px;
     font-size: 20px;
     font-weight: 400;
@@ -145,7 +200,6 @@ input {
     color: #2A3647;
     font-family: inter;
     cursor: pointer;
-    margin: 45px;
     border: 2px solid;
 }
 
@@ -155,68 +209,106 @@ input {
 }
 
 .buttons {
+    padding: 41px 0;
     position: relative;
-    right: 45px;
+    right: -16px;
     top: -33px;
+    gap: 20px;
+    display: flex;
 }
 
 #separatorAddContact {
     position: absolute;
-    height: 10px;
-    width: 112px;
-
+    height: 111px;
+    width: 149px;
     top: 96px;
-    left: 19px;
+    transform: rotate(90deg);
 }
 
-   /* RESPONSIVE */
+::placeholder {
+    color: var(--Style, #D1D1D1);
+}
+
+/* RESPONSIVE */
 
 @media (max-width: 1250px) {
+    #newContactJoinImage {
+        height: 49px;
+        left: 24px;
+    }
+
     .div-input {
         flex-direction: column;
         align-items: center;
         width: 510px;
-        border-top-right-radius: 0px;
-        border-bottom-left-radius: 30px;
-        margin-top: 138px;
+        border-radius: 10px;
+        margin: 93px 10px 10px 10px;
+        padding-top: 0;
     }
 
     .div-container {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        height: 750px;
-        width: 510px;
     }
 
     .new-card {
         flex-direction: column;
         align-items: center;
-        top: 113px;
+        position: relative;
+        top: 20px;
         left: 0px;
+        margin-top: 100px;
+    }
+
+    .new-card img {
+        top: -94px;
+        left: -71px;
+    }
+
+    .input-fields {
+        margin-bottom: 0;
     }
 
     .div-input-fields {
-        left: 10px;
-        top: -10px;
+        gap: 15px;
+        display: flex;
+        flex-direction: column;
+        left: 0;
+        top: 0;
     }
 
     .buttons {
-        right: 14px;
+        right: -126px;
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        width: fit-content;
+        gap: 10px;
+        padding: 41px 0 20px 0;
+    }
+
+    .cancel-btn,
+    .create-btn {
+        margin: 0;
+    }
+
+    .cancel-btn {
+        width: 214px;
     }
 
     .picture {
+        left: 0;
         position: relative;
-        right: 44px;
-        top: -22px;
     }
 
-    .close {
-        top: -365px;
-        left: 223px;
+    .picture-div {
+        position: relative;
+        left: 0;
+        top: -60px;
     }
- 
-    @media (max-width: 520px) and (min-width: 401px) {
+
+    @media (max-width: 520px) {
 
         .div-container {
             flex-direction: column;
@@ -227,12 +319,12 @@ input {
         }
 
         .new-card {
-            line-height: 0.1;
             text-align: center;
         }
 
         .new-card img {
-            display: none;
+            top: -64px;
+            left: -36px;
         }
 
         .new-text {
@@ -257,12 +349,12 @@ input {
             width: 399px;
             border-top-right-radius: 1px;
             border-bottom-left-radius: 30px;
-            margin-top: 187px;
+
         }
 
         .picture-div {
             position: relative;
-            left: 38px;
+            left: 0px;
             top: -34px;
         }
 
@@ -272,23 +364,16 @@ input {
             top: -22px;
         }
 
-        .close {
-            top: -365px;
-            left: 155px;
-        }
-
         .div-input-fields {
             left: -29px;
-            top: -56px;
         }
 
         .input-fields {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 36px;
             background-color: white;
             border: 1px solid #d1d1d1;
-            width: 301px;
+            width: 324px;
             height: auto;
             border-radius: 10px;
             padding: 12px 21px;
@@ -303,154 +388,201 @@ input {
         }
 
         .buttons {
-            right: 14px;
-            height: 82px;
-            padding-left: 133px;
+            right: -138px;
+            display: flex;
+            flex-direction: column-reverse;
+            width: fit-content;
+            margin-top: 42px;
+            gap: 10px;
         }
 
         .cancel-btn {
-            display: none;
+            margin: 0;
+            width: 197px;
         }
 
         .create-btn {
-            width: 214px;
-            height: 57px;
-            font-size: 21px;
-            font-weight: 700;
-            border-radius: 10px;
-            background-color: #2A3647;
-            color: white;
-            font-family: inter;
-            cursor: pointer;
-            border: none;
-            margin: 45px;
-            margin-right: 45px;
-            margin-right: 6px;
+            width: 197px;
+            margin: 0px;
+            margin-right: 0px;
+
         }
     }
 
-    @media (max-width: 400px) and (min-width: 280px) {
+    @media (max-width: 570px) {
         .div-container {
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 75%;
-            width: 288px;
-            margin-bottom: 88px;
-        }
-
-        .new-card {
-            line-height: 0.1;
-            text-align: left;
-            margin-right: 60px;
-        }
-
-        #newContactJoinImage {
-            display: none;
-        }
-
-        .new-text {
-            color: white;
-            font-family: inter;
-            font-weight: 700;
-            font-size: 30px;
-            cursor: default;
-            padding-bottom: 10px;
-        }
-
-        .new-text-2 {
-            color: white;
-            font-family: inter;
-            font-weight: 400;
-            font-size: 13px;
-            cursor: default;
+            width: 100% !important;
+            height: 100% !important;
+            border-radius: unset !important;
         }
 
         .div-input {
-            flex-direction: column;
-            align-items: center;
-            width: 288px;
-            border-top-right-radius: 1px;
-            border-bottom-left-radius: 30px;
-            margin-top: 187px;
-        }
-
-        .picture-div {
+            border-radius: 10px !important;
             position: relative;
-            left: 38px;
-            top: -34px;
+            top: -10px;
         }
 
-        .picture {
-            position: relative;
-            right: 44px;
-            top: -22px;
-        }
-
-        .close {
-            top: -241px;
-            left: 116px;
-        }
-
-        .div-input-fields {
-            left: -29px;
-            top: -56px;
-        }
-
-        .input-fields {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 12px;
-            background-color: white;
-            border: 1px solid #d1d1d1;
-            width: 230px;
-            height: auto;
-            border-radius: 10px;
-
-            margin-left: 90px;
-        }
-
-        input {
-            border: none;
-            outline: none;
-            width: 100%;
-            font-size: 16px;
-        }
-
-        .buttons {
-            right: 14px;
-            height: 82px;
-            padding-left: 133px;
-        }
-
-        .cancel-btn {
-            display: none;
-        }
-
-        .create-btn {
-            width: 214px;
-            height: 57px;
-            font-size: 21px;
-            font-weight: 700;
-            border-radius: 10px;
-            background-color: #2A3647;
-            color: white;
-            font-family: inter;
-            cursor: pointer;
-            border: none;
-            margin: 45px;
-            margin-right: 6px;
-            margin-top: 82px;
+        .new-card {
+            top: 0px;
+            margin-top: 0;
 
         }
+    }
 
-        #separatorAddContact {
-            position: absolute;
-            height: 13px;
-            width: 58px;
-            content: url('/Join/img/separator1.svg');
-            top: 64px;
-            left: 1px;
-        }
+}
+
+@media (max-width: 430px) {
+    .new-card {
+        top: 60px;
+    }
+
+    .div-input {
+        top: 18px;
+        height: 447px;
+    }
+
+    .buttons {
+        margin-top: 0;
+        top: -40px;
+    }
+
+    .div-input-fields {
+        top: -32px;
+    }
+
+    #newContactJoinImage {
+        height: 37px;
+        width: 32px;
+        left: 12px;
+        top: 18px;
+    }
+
+    .close {
+        right: 29px;
+    }
+
+    .create-btn,
+    .cancel-btn {
+        font-size: 16px;
+        width: 173px;
+        height: 50px;
+    }
+}
+
+@media (max-width: 400px) {
+    .new-card {
+        top: 65px;
+    }
+
+    .new-text {
+        font-size: 34px;
+    }
+
+    .new-text-2 {
+        font-size: 16px;
+    }
+
+    .div-input-fields {
+        top: -31px;
+    }
+
+    .contacts-container {
+        height: calc(91vh - 119px);
+    }
+
+    .div-input {
+        height: 428px;
+    }
+
+}
+
+@media (max-width: 410px) {
+    .div-input {
+        width: 340px;
+    }
+
+    .input-fields {
+        width: 276px;
+    }
+
+    input {
+        font-size: 15px;
+    }
+
+    .buttons {
+        right: -122px;
+        margin-top: 0;
+        padding-bottom: 0;
+    }
+}
+
+
+@media (max-width: 375px) {
+    .picture {
+        width: 95px;
+        height: 95px;
+        top: -14px;
+    }
+
+    .input-fields {
+        padding: 8px 21px;
+    }
+}
+
+@media (max-width: 360px) {
+    .div-input {
+        width: 301px;
+    }
+
+    .input-fields {
+        width: 239px;
+    }
+
+    .buttons {
+        right: -112px;
+    }
+
+    .new-text {
+        font-size: 32px;
+    }
+
+    .new-text-2 {
+        font-size: 13px;
+    }
+
+    .create-btn,
+    .cancel-btn {
+        font-size: 17px;
+    }
+}
+
+@media (max-width: 320px) {
+
+    .create-btn,
+    .cancel-btn {
+        height: 40px;
+    }
+
+    .input-fields {
+        padding: 5px 17px;
+    }
+
+    .picture {
+        width: 80px;
+        height: 80px;
+        top: -5px;
+    }
+
+    .new-card {
+        top: 84px;
+    }
+
+    .close {
+        right: 18px;
+        top: 14px;
+    }
+
+    .new-card img {
+        display: none;
     }
 }

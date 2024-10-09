@@ -21,22 +21,31 @@ function createTaskHtml(task, backgroundColor) {
   const progress =
     totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0;
   const html = `
-    <div class="task-small-box" id="${task.id}" draggable="true" ondragstart="startDragging('${task.id}')">
+    <div class="task-small-box" id="${
+      task.id
+    }" draggable="true" ondragstart="startDragging('${task.id}')">
         <div class="task-small-box-content">
             <div class="category">
                 <div class="label-small-box" style="background-color: ${backgroundColor};">
-                    <span>${task.category}</span>                    
-                </div>                
+                    <span>${task.category}</span>   
+                </div>                 
+                    <div class="moveTaskToAnotherCategory" id="move${task.id}">
+                        <img src="/Join/img/move-to-icon.png" alt="">          
+                    </div>
             </div>
             <div>
                 <h1>${task.title}</h1>
-                <p>${task.description}</p>
+                <p id="maxLenghtDescription">${task.description}</p>
             </div>
             <div class="progress-subtasks">
-            ${totalSubtasks > 0 ? `
+            ${
+              totalSubtasks > 0
+                ? `
                 <div class="progress-bar" style="--width: ${progress}"></div>
                 <div class="counter-subtasks">${completedSubtasks}/${totalSubtasks} Subtasks</div>
-                ` : ''}
+                `
+                : ""
+            }
             </div>
             <div class="profilBadges-priority">
                <div class="profil-badges">
@@ -46,10 +55,7 @@ function createTaskHtml(task, backgroundColor) {
                 ${priorityImageHtml}
                 </div>
             </div>
-        </div>
-        <div class="moveTaskToAnotherCategory" id="move${task.id}">
-            <span>Move to</span>
-        </div>
+        </div>   
     </div>
   `;
   return html;
@@ -86,7 +92,7 @@ function createSubtaskHtml(subtaskText) {
  * @returns {string} HTML markup for the big task popup.
  */
 function showBigTaskPopupHtmlTemplate(task, subtasksHtml) {
-  let assignedContactsHtml = task.assignedContactsBadges
+  let assignedContactsHtml = (task.assignedContactsBadges || [])
     .map((contactData) => {
       return `<li class="contact-line-BigBox">
               <div class="contact-badge-container">
@@ -95,8 +101,9 @@ function showBigTaskPopupHtmlTemplate(task, subtasksHtml) {
               </div>
             </li>`;
     })
-      .join("");
-     const categoryColor = getCategoryBackgroundColor(task.category);
+    .join("");
+
+  const categoryColor = getCategoryBackgroundColor(task.category);
   return `
     <div class="BigTaskFormPopUp" id="BigTaskFormPopUp">
         <div class="popupFlex">
@@ -178,8 +185,12 @@ function loadContactsForFormHtmlTemplate(name, initials, initialColor) {
  * @param {string} taskId - The ID of the task associated with the subtasks.
  * @returns {string} HTML markup for displaying subtasks.
  */
-
 function createSubtasksHtml(subtasks, taskId) {
+  // Check if subtasks is an array, if not, set it to an empty array
+  if (!Array.isArray(subtasks)) {
+    subtasks = [];
+  }
+
   return subtasks
     .map(
       (subtask, index) => `
@@ -204,12 +215,15 @@ function createSubtasksHtml(subtasks, taskId) {
 function generateAddTaskFormHtml() {
   return `
     <form class="addTaskPopUp" onsubmit="handleFormSubmit(event)">
-            <div class="addTaskLittle">
+        <div class="addTaskLittle">
                 <div class="titlePositionLittle">
                     <h1>Add Task</h1>
                     <img src="/Join/img/close-icon-board-addtask.svg" onclick="closeAddTaskForm()">
                 </div>
-                <div class="formLeftAndRightFlex">
+            <div class="formLeftAndRightFlex">
+
+                <div class="formBox">
+
                     <div class="addTaskLeftLittle">
                         <div class="titleInputAddTaskBoard">
                             <label for="idTitleInputAddTask">Title
@@ -260,7 +274,7 @@ function generateAddTaskFormHtml() {
                                     <img src="/Join/img/Urgent.png">
                                 </div>
                                 <div class="prioButtons active" id="mediumButton" onclick="changeButtonStyle(this)"
-                                    data-color="#FFA800" style="background-color: rgb(255, 168, 0); color: white; data-text-color="white" data-img-src="/Join/img/prio-icon-medium-white.svg"
+                                    data-color="#FFA800" style="background-color: rgb(255, 168, 0); color: white;" data-text-color="white" data-img-src="/Join/img/prio-icon-medium-white.svg"
                                     data-priority="Medium" >
                                     Medium
                                     <img src="/Join/img/prio-icon-medium-white.svg">
@@ -304,7 +318,9 @@ function generateAddTaskFormHtml() {
                         </div>
                         <div class="bottomSpacer" ></div>
                     </div>
-                </div>
+
+                    </div>
+
                 <div class="editFooter">
                     <!-- <p class="requiredFooter" style="color: #FF8190;">*<span style="color: #000;">This field is required</span></p> -->
                     <div class="footerButtonsAddTask">
@@ -319,6 +335,11 @@ function generateAddTaskFormHtml() {
                         </button>
                     </div>
                 </div>
+
+
+
+                </div>
+               
             </div>
         </form>
   `;

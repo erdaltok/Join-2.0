@@ -5,8 +5,17 @@ body {
 
 body::-webkit-scrollbar {
     display: none;
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.back-icon {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: 50px;
 }
 
 .cardBackArrowMobil {
@@ -32,13 +41,13 @@ body::-webkit-scrollbar {
     align-items: center;
     background: #FFF;
     overflow-y: scroll;
-    height: calc(91vh - 177px);
+    height: calc(91vh - 100px);
     gap: 76px;
 }
 
 .add-contacts-btn {
-    position: absolute;
-    top: 115px;
+    position: fixed;
+    top: 126px;
     width: 352px;
     height: 56px;
     border-radius: 10px;
@@ -51,11 +60,11 @@ body::-webkit-scrollbar {
     align-items: center;
     justify-content: space-evenly;
     cursor: pointer;
-    z-index: 99;
+    z-index: 9;
     padding: 15px;
     border: none;
     left: 281px;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 6px -6px #777;
 }
 
 .add-contacts-btn:hover {
@@ -135,27 +144,27 @@ body::-webkit-scrollbar {
 .contact-view {
     display: flex;
     flex-direction: column;
-    margin-top: -100px;
-    position: absolute;
-    right: 0px;
-    left: 673px;
+    position: fixed;
+    right: 14px;
+    left: 680px;
     height: -webkit-fill-available;
-    background-color: #ececec;
+    background: white;
     height: 100vh;
     box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
     margin-left: 5px;
+    border-radius: 10px;
+    margin-top: -49px;
 }
 
 .contact-header {
     position: relative;
-    top: 136px;
+    top: 47px;
     left: 0px;
 }
 
 .contact-text {
     display: flex;
     align-items: center;
-    margin-top: -96px;
     margin-left: 50px;
     gap: 36px;
     cursor: default;
@@ -167,10 +176,26 @@ body::-webkit-scrollbar {
     font-weight: 700;
 }
 
+.contact-text h2 {
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
 .text-2 {
     font-size: inter;
     font-size: 27px;
     font-weight: 400;
+}
+
+#card {
+    margin-left: 42px;
+    margin-right: 42px;
+    margin-bottom: 90px;
+    border-radius: 10px;
+    box-shadow: 0 10px 6px -6px #777;
+    margin-top: 90px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+    background: white;
 }
 
 .initial-2 {
@@ -187,6 +212,16 @@ body::-webkit-scrollbar {
     color: white;
     box-shadow: 0 0 6px 0 rgb(0, 0, 0, 0.2);
     cursor: default;
+    margin: 0;
+}
+
+.initial-2 p {
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+.info a {
+    color: #2a3647;
 }
 
 .name {
@@ -213,10 +248,11 @@ body::-webkit-scrollbar {
 .card {
     display: flex;
     justify-content: flex-start;
-    margin-top: 76px;
     align-items: center;
-    gap: 51px;
-    margin-left: 76px;
+}
+
+.card img:hover {
+    cursor: pointer;
 }
 
 .edit-delete {
@@ -229,31 +265,34 @@ body::-webkit-scrollbar {
 
 .del {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     gap: 30px;
+    padding: 0 20px;
 }
 
 .information {
     font-family: Inter;
-    font-size: 20px;
-    font-weight: 450;
+    font-size: 19px;
+    font-weight: 700;
     line-height: 24px;
-    position: absolute;
-    left: 90px;
     cursor: default;
+    padding: 0px 20px;
 }
 
 .info {
-    position: relative;
-    left: 86px;
-    top: 68px;
+    background: white;
+    border-radius: 10px;
+    width: fit-content;
 }
 
 .info-1 {
     font-family: Inter;
     font-size: 16px;
-    font-weight: 700;
     cursor: default;
+    gap: 20px;
+    display: flex;
+    align-items: center;
+    margin: 1px;
 }
 
 .info-2 {
@@ -263,18 +302,29 @@ body::-webkit-scrollbar {
     text-decoration: none;
 }
 
+.gap-1 {
+    gap: 28px;
+}
+
+.gap-2 {
+    gap: 20px;
+}
+
 .name-div {
     line-height: 0.1;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 0px 10px;
 }
 
 .msg2 {
-    display: flex;
     justify-content: center;
     align-items: center;
-    display: none;
-    position: absolute;
-    bottom: 137px;
-    left: 841px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 312px;
     height: 74px;
     font-size: 20px;
@@ -284,6 +334,9 @@ body::-webkit-scrollbar {
     color: white;
     font-family: inter;
     border: none;
+    display: none;
+    z-index: 11;
+
 }
 
 .contacts-container::-webkit-scrollbar-button:start:decrement {
@@ -315,15 +368,13 @@ body::-webkit-scrollbar {
     border-radius: 10px;
 }
 
+::-webkit-inner-spin-button {
+    display: none;
+}
+
 /* RESPONSIVE */
 
 @media (max-width: 4000px) and (min-width: 601px) {
-    .info {
-        position: relative;
-        left: 23px;
-        top: -59px;
-    }
-
     .information {
         left: 0px;
         position: relative;
@@ -334,17 +385,12 @@ body::-webkit-scrollbar {
         justify-content: flex-start;
         margin-top: 0px;
         align-items: flex-start;
-        gap: 51px;
-        margin-left: 76px;
         flex-direction: column;
     }
 
-
     .cardBackArrow {
         display: block;
-        position: relative;
-        left: 220px;
-        top: 110px;
+        margin-right: 40px;
     }
 
 }
@@ -353,8 +399,6 @@ body::-webkit-scrollbar {
     .contact-text {
         flex-direction: column;
         align-items: flex-start;
-        margin-left: 24px;
-        gap: 0px;
         line-height: 0;
     }
 
@@ -365,30 +409,55 @@ body::-webkit-scrollbar {
     .card {
         display: flex;
         flex-direction: column;
-        margin-top: 150px;
         align-items: flex-start;
         gap: 0px;
-        margin-left: 30px;
-    }
-
-    .information {
-        left: 15px;
-        top: 294px;
     }
 
     .info {
         left: 15px;
     }
 
+    .initial-2 {
+        height: 100px;
+        width: 100px;
+    }
+
+    .name {
+        font-size: 40px;
+    }
+
     .name-div {
-        position: relative;
-        top: -78px;
-        line-height: normal;
+        gap: 2px;
+    }
+}
+
+@media (max-width: 1235px) {
+    .name-div {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .card {
+        align-items: center;
+    }
+
+    .information {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .back-icon {
+        margin-top: 20px;
     }
 
     .del {
-        margin-top: -34px;
-        gap: 20px;
+        margin: 30px;
     }
 }
 
@@ -397,15 +466,6 @@ body::-webkit-scrollbar {
         width: 296px;
         right: 23px;
     }
-
-    .contacts-div {
-        padding-left: 0px;
-        justify-content: center;
-    }
-
-    .contacts-container {
-        width: 100%;    }
-
 
     .contact-header {
         display: none;
@@ -420,13 +480,16 @@ body::-webkit-scrollbar {
     }
 
     .name {
-        font-size: 21px;
+        font-size: 30px;
         margin-bottom: 42px;
         margin-top: 39px;
     }
 
     .contact-view {
         display: none;
+        left: unset;
+        z-index: 999;
+        height: auto;
     }
 
     .card {
@@ -434,7 +497,35 @@ body::-webkit-scrollbar {
     }
 
     .information {
-        top: -49px;
+        top: -7px;
+    }
+}
+
+@media (max-width: 870px) {
+    .contacts-div {
+        padding-left: 0px;
+    }
+
+    .add-contacts-btn {
+        width: 64px;
+        height: 64px;
+        position: absolute;
+        border-radius: 44px;
+        background-color: #2a3647;
+        color: white;
+        font-family: inter;
+        font-size: 21px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        z-index: 9;
+        padding: 15px;
+        border: none;
+        top: auto;
+        right: 40px;
+        bottom: 147px;
+        left: auto;
     }
 }
 
@@ -466,10 +557,13 @@ body::-webkit-scrollbar {
     }
 }
 
-
 @media (max-width: 600px) and (min-width: 280px) {
     #contact-view {
         display: none;
+    }
+
+    .back-icon {
+        width: 90%;
     }
 
     .contact-view {
@@ -479,8 +573,7 @@ body::-webkit-scrollbar {
         position: absolute;
         left: 0px;
         z-index: 10;
-        margin-top: 1px;
-        height: 77vh;
+        margin-top: 13px;
         background-color: rgb(243, 243, 243);
         margin-left: 0px;
     }
@@ -520,6 +613,7 @@ body::-webkit-scrollbar {
 
     .name {
         font-size: 28px;
+        margin: 0;
     }
 
     .cardBackArrow {
@@ -528,9 +622,7 @@ body::-webkit-scrollbar {
 
     .cardBackArrowMobil {
         display: block;
-        position: relative;
-        left: 294px;
-        bottom: 2px;
+        margin-left: 20px;
     }
 
     .initialDiv {
@@ -571,7 +663,7 @@ body::-webkit-scrollbar {
     .add-contacts-btn p {
         display: none;
     }
-  
+
     .initial-letter {
         height: 2vh;
     }
@@ -582,3 +674,79 @@ body::-webkit-scrollbar {
     }
 }
 
+@media (max-width: 440px) {
+    .info {
+        padding: 0;
+    }
+
+    .gap-1 {
+        gap: 21px;
+    }
+
+    .info-2,
+    .info-1 {
+        font-size: 14px;
+    }
+
+    .back-icon {
+        position: relative;
+        top: -51px;
+    }
+
+    .contacts-container {
+        height: 100%;
+    }
+}
+
+@media (max-width: 400px) {
+    #card {
+        margin-top: 51px;
+    }
+}
+
+@media (max-width: 380px) {
+    .info {
+        padding: 0;
+    }
+
+    .gap-1 {
+        gap: 12px;
+    }
+
+    .info-2,
+    .info-1 {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 380px) {
+
+    .info-2,
+    .info-1 {
+        font-size: 11px;
+    }
+
+    #card {
+        margin-top: 25px;
+    }
+
+    .add-contacts-btn {
+        right: 24px;
+        bottom: 91px;
+    }
+}
+
+@media (max-width: 320px) {
+    .add-contacts-btn {
+        width: 36px;
+        height: 36px;
+        display: flex;
+        justify-content: center;
+        right: 18px;
+        bottom: 102px;
+    }
+
+    .add-contacts-btn img {
+        width: 19px;
+    }
+}

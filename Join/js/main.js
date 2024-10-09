@@ -7,37 +7,44 @@ let currentTaskId = null;
 let fromAddTask = false;
 let newTaskStatus = "todo";
 
-
-/** 
- * Initializes the page by loading tasks from storage, rendering them, and updating task counts.
+/**
+ * Initializes the page by loading tasks from Firebase, rendering them, and updating task counts.
  */
 async function initPage() {
   try {
-    await loadTasksFromStorage();
+    await loadTasksFromStorage(); // Änderungen: Verwendung von Firebase statt getItem()
     renderTasks();
-    updateTaskCounts();    
+    updateTaskCounts();
+    await includeHTML();
+    setActiveLink();
   } catch (error) {
     console.error("Fehler beim Initialisieren der Seite:", error);
   }
 }
 
-/** 
- * Saves the current state of tasks to storage.
+/**
+ * Saves the current state of tasks to Firebase.
  */
 async function saveTasksToStorage() {
-  await setItem("tasks", tasks);
+  try {
+    await putData("tasks", tasks); 
+  } catch (error) {
+    console.error("Fehler beim Speichern der Tasks:", error);
+  }
 }
 
-/** 
- * Loads tasks from storage and updates the task list.
+/**
+ * Loads tasks from Firebase and updates the task list.
+ * Änderungen: Die Daten werden nun mit Firebase geladen, statt über getItem.
  */
 async function loadTasksFromStorage() {
   try {
-    const loadedTasks = await getItem("tasks");
+    const loadedTasks = await loadData("tasks");
     if (!loadedTasks) {
       tasks = [];
-      return; }
-    tasks = Array.isArray(loadedTasks) ? loadedTasks : JSON.parse(loadedTasks);
+      return;
+    }
+    tasks = Object.values(loadedTasks);
   } catch (error) {
     console.error("Fehler beim Laden der Tasks:", error);
   }
@@ -53,11 +60,10 @@ function renderTasks() {
   clearColumns();
   renderTaskBoxes();
   attachTaskBoxListeners();  
-  // Adding event listener to move task to another category
+  
   document.querySelectorAll(".moveTaskToAnotherCategory").forEach((box) => {
     box.addEventListener("click", handleMoveTaskToAnotherCategory);
   });
-
 }
 
 /** 
@@ -378,3 +384,59 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", initPage);
+
+function smoothPageLoad() {
+  const currentPage = window.location.pathname
+    .split("/")
+    .pop()
+    .replace(".html", "");
+
+  switch (currentPage) {
+    case "summary":
+      init("summary");
+      break;
+    case "board":
+      init("board");
+      break;
+    case "addTask":
+      init("addTask");
+      break;
+    case "contacts":
+      init("Contacts");
+      break;
+    case "privacy":
+      init("privacy");
+      break;
+    case "legal":
+      init("legal");
+      break;
+    case "signup":
+      init("signup");
+      break;
+  }
+
+  setTimeout(() => {
+    document.body.classList.add("loaded");
+  }, 50);
+
+}
+
+function setActiveLink() {
+  const links = document.querySelectorAll(".menu-links");
+  const currentPage = window.location.pathname
+    .split("/")
+    .pop()
+    .replace(".html", "");
+
+  links.forEach((link) => {
+    link.style.backgroundColor = "";
+
+    if (link.getAttribute("href").includes(currentPage)) {
+      link.style.backgroundColor = "rgba(9, 25, 49, 1)";
+    }
+  });
+}
+
+
+
+

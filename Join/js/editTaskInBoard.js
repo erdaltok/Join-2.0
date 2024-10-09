@@ -58,15 +58,13 @@ function initializeEditForm() {
 function toggleDisplayForEdit() {
   initializeEditForm();
 }
-
 /**
  * Fills the edit task form with the current values of the selected task.
  * @param {object} currentTask - The task currently being edited.
  */
 function showCurrentValuesFromTask(currentTask) {
   document.getElementById("idTitleInputAddTask").value = currentTask.title;
-  document.getElementById("idDescriptionAddTask").value =
-    currentTask.description;
+  document.getElementById("idDescriptionAddTask").value = currentTask.description;
   updateSelectedContactsForTask(currentTask);
   document.getElementById("idTitleDateAddTask").value = formatDueDateForInput(
     currentTask.dueDate
@@ -76,7 +74,12 @@ function showCurrentValuesFromTask(currentTask) {
   const categorySelect = document.getElementById("idSelectCategoryAddTask");
   if (categorySelect) {
     categorySelect.value = currentTask.category;
-    subtasks = currentTask.subtasks.map((subtask) => subtask.text);
+    
+    // Ensure currentTask.subtasks is an array, if not, set it to an empty array
+    subtasks = Array.isArray(currentTask.subtasks)
+      ? currentTask.subtasks.map((subtask) => subtask.text)
+      : [];
+    
     updateSubtaskList();
   }
 }
@@ -204,13 +207,19 @@ async function saveUpdatedTask() {
 function updateSelectedContactsForTask(task) {
   selectedContacts = [];
   const contactLines = document.querySelectorAll(".contact-line");
+
   contactLines.forEach((line) => {
     const contactName = line.querySelector(".contact-name").textContent;
-    if ( task.assignedContactsBadges.some(
-        (contact) => contact.name === contactName)) {
-      addedContactToTask(line); } else {
-      removeContactFromTask(line);}
+
+    // Check if assignedContactsBadges exists and is an array
+    if (Array.isArray(task.assignedContactsBadges) && 
+        task.assignedContactsBadges.some((contact) => contact.name === contactName)) {
+      addedContactToTask(line);
+    } else {
+      removeContactFromTask(line);
+    }
   });
+
   updateAddedContactsDisplay();
 }
 

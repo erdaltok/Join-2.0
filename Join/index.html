@@ -11,7 +11,7 @@
 
     <script src="/Join/js/login.js"></script>
     <script src="/Join/js/storage.js"></script>
-    <script src="/Join/js/register.js"></script>  
+    <script src="/Join/js/register.js" defer></script>  
     
 </head>
 
@@ -19,12 +19,14 @@
     <div class="logo-container">
         <img src="/Join/img/logo1.png" alt="Logo" class="logo" id="logo">
     </div>
+
     <div id="animation" style="display: none;" class="top-container">
        
             <div class="not-user-div">
                 <span class="not-user">Not a Join user?</span>
                 <a href="/Join/signup.html"><button type="button" class="sign-in-btn"><b>Sign up</b></button></a>
             </div>
+            
         <div class="login-div">
             <div class="log-in-window">
                 <form onsubmit="login(); return false;">
@@ -51,8 +53,17 @@
                     </div>
                     <div class="log-in-buttons">
                         <button  id="logIn" class="log-in-btn">Login</button>
+
+                        <div class="not-user-div-mobile">
+                            <span class="not-user">Not a Join user?</span>
+                            <a href="/Join/signup.html"><button type="button" class="sign-in-btn"><b>Sign up</b></button></a>
+                        </div>
+
+                        
                         <button onclick="guestLogin1()" class="guest-btn">Guest Login</button>
                     </div>
+
+                    
                 </form>
             </div>
             <div id="error-message" class="msg1"></div>

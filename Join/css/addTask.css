@@ -85,6 +85,7 @@
 
 .formLeftAndRightFlex {
   display: flex;
+  flex-direction: column;
   width: 100%;
   margin-top: 32px;
   max-height: 588px;
@@ -92,6 +93,10 @@
 
 .formLeftAndRightFlex::-webkit-scrollbar {
   display: none;
+}
+
+.formBox {
+  display: flex;
 }
 
 .titleInputAddTaskBoard label {
@@ -451,7 +456,6 @@ input {
   display: flex;
 }
 
-
 .closeCheckSubstask img:hover {
   background-color: #edebeb;
   border-radius: 50%;
@@ -535,7 +539,6 @@ input {
   color: red;
 }
 
-
 .formFooter {
   display: flex;
   background: rgb(255, 255, 255);
@@ -548,8 +551,8 @@ input {
   display: flex;
   align-items: center;
   gap: 25px;
-  position: fixed;
-  bottom: 50px;
+  /* position: fixed;
+  bottom: 50px; */
 }
 
 .footerButtonsAddTask button {
@@ -712,8 +715,18 @@ input {
     margin-left: 282px;
   }
 
+  .addTaskLittle {
+    overflow: auto;
+    scrollbar-width: none;
+    height: 700px;
+  }
+
   .addTaskLeftLittle {
     width: 100%;
+  }
+
+  .formBox {
+    flex-direction: column;
   }
 
   .footerButtonsAddTask button {
@@ -726,11 +739,12 @@ input {
     border: 1px solid var(--version-2-main-color, #2A3647);
     font-size: 16px;
     width: 154px;
+    height: 44px;
   }
 
   .addTaskPopUp {
     height: 90vh;
-    overflow: scroll;
+    /* overflow: scroll; */
   }
 
   .dividerLittle {
@@ -739,12 +753,12 @@ input {
 
   .formFooter {
     display: flex;
-    position: relative;
+    /* position: relative; */
     background: rgb(255, 255, 255);
-    bottom: -480px;
+    /* bottom: -480px; */
     align-items: center;
     justify-content: flex-start;
-    padding-bottom: 18px;
+    padding-bottom: 142px;
     padding-top: 20px;
   }
 
@@ -827,8 +841,8 @@ input {
     align-items: center;
     justify-content: flex-end;
     gap: 80px;
-    position: relative;
-    bottom: 22px;
+    /* position: relative;
+    bottom: 22px; */
     width: 100%;
   }
 
@@ -849,7 +863,6 @@ input {
     display: flex;
     flex-direction: column;
   }
-
 }
 
 @media(max-width: 600px) {
@@ -869,9 +882,9 @@ input {
     overflow-x: hidden;
   }
 
-
   .addTaskPopUp {
     overflow: scroll;
+    scrollbar-width: none;
   }
 
   .formLeftAndRightFlex {
@@ -894,11 +907,9 @@ input {
   }
 }
 
-
-
 @media(max-width: 435px) {
   .addTaskLittle {
-    height: 153vh;
+    height: 128vh;
     padding: 20px;
   }
 
@@ -916,7 +927,6 @@ input {
 
   .addTaskLittle {
     margin-top: 74px;
-
   }
 
   .addTaskPopUp {
@@ -1156,5 +1166,31 @@ input {
   .prioButtons img {
     width: 14px;
     height: 10px;
+  }
+}
+
+@media (max-width: 375px) {
+  .footerButtonsAddTask {
+    margin-left: 11px;
+  }
+}
+
+
+@media (max-width: 353px) {
+  .footerButtonsAddTask button {
+    width: 105px;
+  }
+
+  .buttonsFooter {
+    position: relative;
+    left: -37px;
+  }
+}
+
+
+@media (max-width: 320px) {
+  .buttonsFooter {
+    position: relative;
+    left: -22px;
   }
 }

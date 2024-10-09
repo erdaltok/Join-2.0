@@ -128,6 +128,26 @@ function deleteSubtask(event) {
 }
 
 /**
+ * Resets the subtasks when the form is closed or a new task is created.
+ * This function clears the input field, resets the subtask array,
+ * and updates the UI components related to subtasks.
+ * 
+ * @returns {void}
+ */
+function resetSubtasks() {
+  const inputField = document.getElementById("inputFieldSubtaskId");
+  if (inputField) {
+    inputField.value = ""; 
+  }
+  subtasks = [];
+  updateSubtaskList();
+  toggleSubtaskDisplay();
+  completedSubtasks = 0;
+  totalSubtasks = 0;
+  updateProgressBar();
+}
+
+/**
  * Updates the progress bar and subtask counter based on the current state.
  */
 function updateProgressBar() {
