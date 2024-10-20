@@ -86,6 +86,13 @@
     max-width: 200px;
 }
 
+#maxLenghtTitle {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+}
+
 .moveTaskToAnotherCategory {
     height: 20px;
     border: 1px dashed lightgray;
@@ -201,7 +208,9 @@
 
 @media (max-width: 1411px) {
     .task-small-box {
-        margin-bottom: 19px;
+        /* margin-bottom: 19px; */
+        max-width: 231px;
+        min-width: 190px;
     }
 }
 

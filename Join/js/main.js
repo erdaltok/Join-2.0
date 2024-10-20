@@ -385,6 +385,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener("DOMContentLoaded", initPage);
 
+/**
+ * Initializes the page and sets the active link based on the current page.
+ * Adds a class 'loaded' to the body with a delay for smooth page load effect.
+ */
 function smoothPageLoad() {
   const currentPage = window.location.pathname
     .split("/")
@@ -419,8 +423,23 @@ function smoothPageLoad() {
     document.body.classList.add("loaded");
   }, 50);
 
+  setActiveLink(); 
 }
 
+/**
+ * Adds a delay after page load and then sets the active link in the menu
+ * based on the current page URL.
+ */
+document.addEventListener("DOMContentLoaded", () => {
+  setTimeout(() => {
+    setActiveLink(); 
+  }, 500); 
+});
+
+/**
+ * Highlights the active menu link by checking the current page's URL.
+ * Resets the background color for all links, and highlights the one that matches the current page.
+ */
 function setActiveLink() {
   const links = document.querySelectorAll(".menu-links");
   const currentPage = window.location.pathname
@@ -429,7 +448,7 @@ function setActiveLink() {
     .replace(".html", "");
 
   links.forEach((link) => {
-    link.style.backgroundColor = "";
+    link.style.backgroundColor = ""; 
 
     if (link.getAttribute("href").includes(currentPage)) {
       link.style.backgroundColor = "rgba(9, 25, 49, 1)";

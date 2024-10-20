@@ -234,13 +234,19 @@ a {
 
     .desktop-navbar {
         top: auto;
-        bottom: 0px;
+        /* bottom: 0px; */
         height: 92px;
-        width: 100vw;
+        /* width: 100vw; */
         padding: 0;
-        left: 0;
-        border-radius: unset;
+        /* left: 0;
+        border-radius: unset; */
+        width: 99vw;
+        bottom: 5px;
+        border-radius: 10px;
+        left: 4px;
     }
+
+
 
     .desktop-header {
         left: 14px;
@@ -371,6 +377,8 @@ a {
 
     .desktop-navbar {
         height: 84px;
+        width: 98vw;
+        left: 5px;
     }
 }
 
@@ -379,6 +387,15 @@ a {
         height: 50px;
         min-height: 63px;
         justify-content: space-between;
+    }
+
+    .desktop-navbar {
+        height: 80px;
+        left: 4px;
+    }
+
+    .menu-links {
+        padding: 5px 41px;
     }
 
     .user-profil-box {
@@ -393,6 +410,14 @@ a {
 
     .user-initials {
         font-size: 20px;
+    }
+
+    .desktop-navbar-menu a {
+        font-size: 13px;
+    }
+
+    .desktop-navbar-menu {
+        left: 5px;
     }
 }
 

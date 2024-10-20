@@ -15,7 +15,9 @@
     <link rel="stylesheet" href="/Join/css/taskSmallBoxInBoardPage.css">
     <link rel="stylesheet" href="/Join/css/editTaskPopUpInBoard.css">
     <link rel="stylesheet" href="/Join/css/contacts.css">
-    
+
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+ 
     <script src="/Join/js/storage.js" defer></script>
     <script src="/Join/js/main.js" defer></script>
     <script src="/Join/js/summary.js" defer></script>
@@ -27,132 +29,154 @@
     <script src="/Join/js/contactListAddTaskInBoardPage.js" defer></script>
     <script src="/Join/js/contacts.js" defer></script>
     <script src="/Join/js/editTaskInBoard.js" defer></script>
-    <script src="/Join/js/addTask.js" defer></script> 
-    
+    <script src="/Join/js/addTask.js" defer></script>
 </head>
 
-<body onload="init('board'); smoothPageLoad()"> 
-    
+<body onload="init('board'); smoothPageLoad()">
+
     <div w3-include-html="/Join/template/desktop_template.html"></div>
 
-        <div id="mainBoard" class="board-main">
-
-            <div class="board-heading">
-                <div class="board-heading-left">
-                    <h1>Board</h1>
-                </div>
-
-                <div class="board-heading-right">
-
-                    <div class="search-box">
-                        <input placeholder="Find Task" id="search-Task" onkeyup="searchTask()" type="text">
-                        <div class="search-btn">
-                            <img src="/Join/img/separator-gray.svg" alt="">
-                            <img class="search-svg" src="/Join/img/search.svg" alt="">
-                        </div>
-                    </div>
-
-                    <button class="addTask-btn" onclick="openNewTaskBoard('todo')">
-                        <span>Add Task</span>
-                        <img src="/Join/img/add-icon-board.svg" alt="">
-                    </button>
-                </div>
+    <div id="mainBoard" class="board-main">
+        <div class="board-heading">
+            <div class="board-heading-left">
+                <h1>Board</h1>
             </div>
 
-            <div class="board-columns">
-
-                <div class="todo-column">
-                    <div class="column-title">
-                        <span>To do</span>
-                        <img src="/Join/img/plus-icon-board-column.svg" class="changeableImage" onclick="openNewTaskBoard('todo')">
-                    </div>
-
-                    <div class="column-content drag-area" id="todo" ondrop="moveTo('todo')"
-                        ondragleave="removeHighlight('todo')" ondragover="allowDrop(event); highlight('todo')">
-
-                        <div class="placeholder-tasks-todo">
-                            <span>No tasks To do</span>
-                        </div>
+            <div class="board-heading-right">
+                <div class="search-box">
+                    <input placeholder="Find Task" id="search-Task" onkeyup="searchTask()" type="text">
+                    <div class="search-btn">
+                        <img src="/Join/img/separator-gray.svg" alt="">
+                        <img class="search-svg" src="/Join/img/search.svg" alt="">
                     </div>
                 </div>
 
-                <div class="progress-column">
-                    <div class="column-title">
-                        <span>In progress</span>
-                        <img src="/Join/img/plus-icon-board-column.svg" class="changeableImage" onclick="openNewTaskBoard('inProgress')">
-                    </div>
-
-                    <div class="column-content drag-area" id="inProgress" ondrop="moveTo('inProgress')"
-                        ondragleave="removeHighlight('inProgress')"
-                        ondragover="allowDrop(event); highlight('inProgress')">
-
-                        <div class="placeholder-tasks-progress">
-                            <span>No tasks in progress</span>
-                        </div>                       
-                    </div>
-                </div>
-
-                <div class="feedback-column">
-                    <div class="column-title">
-                        <span>Await feedback</span>
-                        <img src="/Join/img/plus-icon-board-column.svg" class="changeableImage" onclick="openNewTaskBoard('awaitFeedback')">
-                    </div>
-
-                    <div class="column-content drag-area" id="awaitFeedback" ondrop="moveTo('awaitFeedback')"
-                        ondragleave="removeHighlight('awaitFeedback')"
-                        ondragover="allowDrop(event); highlight('awaitFeedback')">
-
-                        <div class="placeholder-tasks-feedback">
-                            <span>No tasks Await feedback</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="done-column">
-                    <div class="column-title">
-                        <span>Done</span>
-
-                    </div>
-
-                    <div class="column-content drag-area" id="done" ondrop="moveTo('done')"
-                        ondragleave="removeHighlight('done')" ondragover="allowDrop(event); highlight('done')">
-
-                        <div class="placeholder-tasks-done">
-                            <span>No tasks Done</span>
-                        </div>
-                    </div>
-                    <span id="spacer"></span>
-                </div>
+                <button class="addTask-btn" onclick="openNewTaskBoard('todo')">
+                    <span>Add Task</span>
+                    <img src="/Join/img/add-icon-board.svg" alt="">
+                </button>
             </div>
-             
         </div>
 
-<!-- AddTask Form in Board-Page -->
+        <div class="board-columns">
+            <div class="todo-column">
+                <div class="column-title">
+                    <span>To do</span>
+                    <img src="/Join/img/plus-icon-board-column.svg" class="changeableImage"
+                        onclick="openNewTaskBoard('todo')">
+                </div>
+                <div class="column-content drag-area" id="todo">
+                    <div class="placeholder-tasks-todo">
+                        <span>No tasks To do</span>
+                    </div>
+                </div>
+            </div>
 
-<div class="addTaskFormPopUp" style="display: none;">
-    <div class="popupFlex">
-        <div id="importAddTaskForm"></div>
+            <div class="progress-column">
+                <div class="column-title">
+                    <span>In progress</span>
+                    <img src="/Join/img/plus-icon-board-column.svg" class="changeableImage"
+                        onclick="openNewTaskBoard('inProgress')">
+                </div>
+                <div class="column-content drag-area" id="inProgress">
+                    <div class="placeholder-tasks-progress">
+                        <span>No tasks in progress</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feedback-column">
+                <div class="column-title">
+                    <span>Await feedback</span>
+                    <img src="/Join/img/plus-icon-board-column.svg" class="changeableImage"
+                        onclick="openNewTaskBoard('awaitFeedback')">
+                </div>
+                <div class="column-content drag-area" id="awaitFeedback">
+                    <div class="placeholder-tasks-feedback">
+                        <span>No tasks Await feedback</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="done-column">
+                <div class="column-title">
+                    <span>Done</span>
+                </div>
+                <div class="column-content drag-area" id="done">
+                    <div class="placeholder-tasks-done">
+                        <span>No tasks Done</span>
+                    </div>
+                </div>
+                <span id="spacer"></span>
+            </div>
+        </div>
     </div>
-</div>
 
-<div id="bigTaskBoxContainer"></div>
-
-
-<!-- EDIT TASK  -->
-
-<div id="editTaskBoxContainer" style="display: none;">
-
-    <div class="editBigTaskFormPopUp" id="editBigTaskFormPopUp">
-    <div class="editPopUpFlex">
-        <div id="editTaskDisplay"></div>
+    <!-- AddTask Form in Board-Page -->
+    <div class="addTaskFormPopUp" style="display: none;">
+        <div class="popupFlex">
+            <div id="importAddTaskForm"></div>
+        </div>
     </div>
-    </div>
-</div>
 
-<div id="addNewTaskMessage" class="addNewTaskMessage"></div>
+    <div id="bigTaskBoxContainer"></div>
+    <div id="editTaskBoxContainer" style="display: none;">
+        <div class="editBigTaskFormPopUp" id="editBigTaskFormPopUp">
+            <div class="editPopUpFlex">
+                <div id="editTaskDisplay"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="addNewTaskMessage" class="addNewTaskMessage"></div>
+
+    <!-- SortableJs function: Drag & Drop tasks  -->
+    <script>
+        
+       document.addEventListener("DOMContentLoaded", function () {
+            const columns = ["todo", "inProgress", "awaitFeedback", "done"];
+
+            columns.forEach((columnId) => {
+                const columnElement = document.getElementById(columnId);
+                if (columnElement) {
+                    new Sortable(columnElement, {
+                        group: "shared",
+                        animation: 150,
+                        ghostClass: "sortable-ghost",
+                        delay: 200, 
+                        delayOnTouchOnly: true,
+                        touchStartThreshold: 3,
+                        onEnd: function (evt) {
+                            const draggedItemId = evt.item.id;
+                            const newColumnId = evt.to.id;
+
+                            const taskIndex = tasks.findIndex(
+                                (t) => t.id.toString() === draggedItemId.toString()
+                            );
+                            if (taskIndex !== -1) {
+                                tasks[taskIndex].status = newColumnId;
+                                const [movedTask] = tasks.splice(taskIndex, 1);
+                                const toColumnTasks = tasks.filter((t) => t.status === newColumnId);
+                                const newTaskPosition = evt.newIndex;
+                                toColumnTasks.splice(newTaskPosition, 0, movedTask);
+                                tasks = tasks
+                                    .filter((t) => t.status !== newColumnId)
+                                    .concat(toColumnTasks);
+                                saveTasksToStorage();
+                            }
+
+                            console.log(
+                                `Task ${draggedItemId} moved to ${newColumnId}, position ${evt.newIndex}`
+                            );
+                        },
+                    });
+                } else {
+                    console.error(`Element with id ${columnId} not found`);
+                }
+            });
+        });
+    </script>
 
 </body>
 
 </html>
-
-

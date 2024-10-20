@@ -34,7 +34,7 @@ function createTaskHtml(task, backgroundColor) {
                     </div>
             </div>
             <div>
-                <h1>${task.title}</h1>
+                <h1 id="maxLenghtTitle">${task.title}</h1>
                 <p id="maxLenghtDescription">${task.description}</p>
             </div>
             <div class="progress-subtasks">

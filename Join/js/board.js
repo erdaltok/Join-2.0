@@ -1,4 +1,3 @@
-
 /**
  * Initiates the dragging process for a task.
  * @param {string} id - The ID of the task being dragged.
@@ -26,10 +25,12 @@ function moveTo(columnId) {
     const item = document.getElementById(draggedItemId);
     document.getElementById(columnId).appendChild(item);
     const task = tasks.find(
-      (t) => t.id.toString() === draggedItemId.toString());
+      (t) => t.id.toString() === draggedItemId.toString()
+    );
     if (task) {
       task.status = columnId;
-      saveTasksToStorage();}
+      saveTasksToStorage();
+    }
     draggedItemId = null;
     clearHighlights();
   }
@@ -67,7 +68,8 @@ function searchTask() {
   const filteredTasks = tasks.filter(
     (task) =>
       task.title.toLowerCase().includes(searchText) ||
-      task.description.toLowerCase().includes(searchText));
+      task.description.toLowerCase().includes(searchText)
+  );
   renderFilteredTasks(filteredTasks);
 }
 
@@ -94,18 +96,18 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-/**
- * Changes the image source to a blue plus icon on mouseover.
- */
+  /**
+   * Changes the image source to a blue plus icon on mouseover.
+   */
   const imageElements = document.querySelectorAll(".changeableImage");
   imageElements.forEach((imageElement) => {
     imageElement.addEventListener("mouseover", function () {
       this.src = "/Join/img/plus-icon-board-column-blue.svg";
     });
 
-/**
- * Changes the image source back to the default plus icon on mouseout.
- */
+    /**
+     * Changes the image source back to the default plus icon on mouseout.
+     */
     imageElement.addEventListener("mouseout", function () {
       this.src = "/Join/img/plus-icon-board-column.svg";
     });
@@ -118,15 +120,15 @@ document.addEventListener("DOMContentLoaded", function () {
  * @param {Array} tasks - The array of tasks to update.
  */
 function updateTaskStatus(id, tasks) {
-   // Check the prefix of the task ID and update its status accordingly
+  // Check the prefix of the task ID and update its status accordingly
   if (id.slice(0, 2) === "TD") {
-      tasks.status = "todo";
+    tasks.status = "todo";
   } else if (id.slice(0, 2) === "IP") {
-      tasks.status = "inProgress";
+    tasks.status = "inProgress";
   } else if (id.slice(0, 2) === "AF") {
-      tasks.status = "awaitFeedback";
+    tasks.status = "awaitFeedback";
   } else if (id.slice(0, 2) === "DN") {
-      tasks.status = "done";
+    tasks.status = "done";
   }
   saveTasksToStorage();
 }
@@ -138,17 +140,25 @@ function updateTaskStatus(id, tasks) {
  * @param {string} trueID - The ID of the container element where options will be rendered.
  */
 function renderDoneTaskOptions(tasks, i, trueID) {
-    /**
-     * If the task status is "done", renders options for moving the task back to different statuses.
-     * @param {string} tasks[i].status - The status of the task.
-     * @param {string} tasks[i].id - The ID of the task.
-     */
+  /**
+   * If the task status is "done", renders options for moving the task back to different statuses.
+   * @param {string} tasks[i].status - The status of the task.
+   * @param {string} tasks[i].id - The ID of the task.
+   */
   if (tasks[i].status === "done") {
-      document.getElementById(trueID).innerHTML =
-          '<div id="TD'+tasks[i].id+'" class="moveToDivs">To Do</div>'+
-          '<div id="IP'+tasks[i].id+'" class="moveToDivs">In progress</div>'+
-          '<div id="AF'+tasks[i].id+'" class="moveToDivs">Await feedback</div>'+
-          '<div id="CN'+tasks[i].id+'" class="moveToDivs" style="background-color:red;color:white;">Cancel</div>';
+    document.getElementById(trueID).innerHTML =
+      '<div id="TD' +
+      tasks[i].id +
+      '" class="moveToDivs">To Do</div>' +
+      '<div id="IP' +
+      tasks[i].id +
+      '" class="moveToDivs">In progress</div>' +
+      '<div id="AF' +
+      tasks[i].id +
+      '" class="moveToDivs">Await feedback</div>' +
+      '<div id="CN' +
+      tasks[i].id +
+      '" class="moveToDivs" style="background-color:red;color:white;">Cancel</div>';
   }
 }
 
@@ -160,16 +170,24 @@ function renderDoneTaskOptions(tasks, i, trueID) {
  */
 function renderAwaitFeedbackTaskOptions(tasks, i, trueID) {
   /**
-     * If the task status is "awaitFeedback", renders options for moving the task to different statuses.
-     * @param {string} tasks[i].status - The status of the task.
-     * @param {string} tasks[i].id - The ID of the task.
-     */
+   * If the task status is "awaitFeedback", renders options for moving the task to different statuses.
+   * @param {string} tasks[i].status - The status of the task.
+   * @param {string} tasks[i].id - The ID of the task.
+   */
   if (tasks[i].status === "awaitFeedback") {
-      document.getElementById(trueID).innerHTML =
-          '<div id="TD'+tasks[i].id+'" class="moveToDivs">To Do</div>'+
-          '<div id="IP'+tasks[i].id+'" class="moveToDivs">In Progress</div>'+
-          '<div id="DN'+tasks[i].id+'" class="moveToDivs">Done</div>'+
-          '<div id="CN'+tasks[i].id+'" class="moveToDivs" style="background-color:red;color:white;">Cancel</div>';
+    document.getElementById(trueID).innerHTML =
+      '<div id="TD' +
+      tasks[i].id +
+      '" class="moveToDivs">To Do</div>' +
+      '<div id="IP' +
+      tasks[i].id +
+      '" class="moveToDivs">In Progress</div>' +
+      '<div id="DN' +
+      tasks[i].id +
+      '" class="moveToDivs">Done</div>' +
+      '<div id="CN' +
+      tasks[i].id +
+      '" class="moveToDivs" style="background-color:red;color:white;">Cancel</div>';
   }
 }
 
@@ -180,17 +198,25 @@ function renderAwaitFeedbackTaskOptions(tasks, i, trueID) {
  * @param {string} trueID - The ID of the container element where options will be rendered.
  */
 function renderInProgressTaskOptions(tasks, i, trueID) {
-    /**
-     * If the task status is "inProgress", renders options for moving the task to different statuses.
-     * @param {string} tasks[i].status - The status of the task.
-     * @param {string} tasks[i].id - The ID of the task.
-     */
+  /**
+   * If the task status is "inProgress", renders options for moving the task to different statuses.
+   * @param {string} tasks[i].status - The status of the task.
+   * @param {string} tasks[i].id - The ID of the task.
+   */
   if (tasks[i].status === "inProgress") {
-      document.getElementById(trueID).innerHTML =
-          '<div id="TD'+tasks[i].id+'" class="moveToDivs">To Do</div>'+
-          '<div id="AF'+tasks[i].id+'" class="moveToDivs">Await feedback</div>'+
-          '<div id="DN'+tasks[i].id+'" class="moveToDivs">Done</div>'+
-          '<div id="CN'+tasks[i].id+'" class="moveToDivs" style="background-color:red;color:white;">Cancel</div>';
+    document.getElementById(trueID).innerHTML =
+      '<div id="TD' +
+      tasks[i].id +
+      '" class="moveToDivs">To Do</div>' +
+      '<div id="AF' +
+      tasks[i].id +
+      '" class="moveToDivs">Await feedback</div>' +
+      '<div id="DN' +
+      tasks[i].id +
+      '" class="moveToDivs">Done</div>' +
+      '<div id="CN' +
+      tasks[i].id +
+      '" class="moveToDivs" style="background-color:red;color:white;">Cancel</div>';
   }
 }
 
@@ -201,35 +227,37 @@ function renderInProgressTaskOptions(tasks, i, trueID) {
  * @param {string} trueID - The ID of the container element where options will be rendered.
  */
 function renderToDoTaskOptions(tasks, i, trueID) {
-   /**
-     * If the task status is "todo", renders options for moving the task to different statuses.
-     * @param {string} tasks[i].status - The status of the task.
-     * @param {string} tasks[i].id - The ID of the task.
-     */
+  /**
+   * If the task status is "todo", renders options for moving the task to different statuses.
+   * @param {string} tasks[i].status - The status of the task.
+   * @param {string} tasks[i].id - The ID of the task.
+   */
   if (tasks[i].status === "todo") {
-      document.getElementById(trueID).innerHTML =
-          '<div id="IP'+tasks[i].id+'" class="moveToDivs"><span>In progress</span></div>'+
-          '<div id="AF'+tasks[i].id+'" class="moveToDivs">Await feedback</div>'+
-          '<div id="DN'+tasks[i].id+'" class="moveToDivs">Done</div>'+
-          '<div id="CN'+tasks[i].id+'" class="moveToDivs" style="background-color:red;color:white;">Cancel</div>';
+    document.getElementById(trueID).innerHTML =
+      '<div id="IP' +
+      tasks[i].id +
+      '" class="moveToDivs"><span>In progress</span></div>' +
+      '<div id="AF' +
+      tasks[i].id +
+      '" class="moveToDivs">Await feedback</div>' +
+      '<div id="DN' +
+      tasks[i].id +
+      '" class="moveToDivs">Done</div>' +
+      '<div id="CN' +
+      tasks[i].id +
+      '" class="moveToDivs" style="background-color:red;color:white;">Cancel</div>';
   }
 }
 
 /**
- * Finds the index of a task in an array of tasks by its ID.
- * @param {string} id - The ID of the task to find.
- * @param {Array} tasks - The array of tasks to search within.
- * @returns {number} - The index of the task if found, otherwise -1.
+ * Iterates through the tasks array to find the index of the task with the specified ID.
+ * @param {string} tasks[i].id - The ID of the current task being checked.
  */
 function findTaskIndexById(id, tasks) {
-   /**
-     * Iterates through the tasks array to find the index of the task with the specified ID.
-     * @param {string} tasks[i].id - The ID of the current task being checked.
-     */
-    for (let i = 0; i < tasks.length; i++) {
-        if (tasks[i].id === id) {
-            return i;
-        }
+  for (let i = 0; i < tasks.length; i++) {
+    if (tasks[i].id === id) {
+      return i;
     }
-    return -1; // Return -1 if the task with the specified id is not found
+  }
+  return -1; // Return -1 if the task with the specified id is not found
 }
